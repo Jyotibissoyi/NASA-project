@@ -1,0 +1,15 @@
+
+.footer{
+    height: 200px;
+    border: #3a7283;
+    box-sizing: border-box;
+    background-image: linear-gradient(#cfdefa, #3a7283);
+    text-align: center;
+ flex: auto;
+}
+.tag{
+    color: #000;
+    text-decoration: none;
+    list-style: none;  
+}
+

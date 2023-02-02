@@ -1,0 +1,19 @@
+.main{
+    
+    background-image:url(../images/image2.jpg) ;
+    align-items: center;
+  
+}
+.head{
+   font-size: 100px;
+   text-shadow: 10px;
+   text-align: center;
+   color: rgb(240, 238, 238);
+}
+.parg{
+    font-size: 50px;
+    text-align: center;
+    color: aliceblue;
+    text-shadow: 10px;
+    margin-bottom: auto;
+}
