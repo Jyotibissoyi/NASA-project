@@ -27,8 +27,9 @@ in that page there is select option by using that user can select date and get p
 
 
 
+<img width="960" alt="Screenshot back" src="https://user-images.githubusercontent.com/115546896/216423293-17c41483-01ca-4310-affa-e545f451d881.png">
 
-![Uploading Screenshot back.png…]()
+
 
 Depandencies --> nodemon, mongoose, moment, express, Axios
 
@@ -42,6 +43,7 @@ Components --> Navbar, Footer, About,  Contact, Search, Today's picture
 
 
 
+<img width="960" alt="Screenshot front" src="https://user-images.githubusercontent.com/115546896/216423140-a0455552-ac54-419e-a734-ed127c3f16f2.png">
 
 
 
