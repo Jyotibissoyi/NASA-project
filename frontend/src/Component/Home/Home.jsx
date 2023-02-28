@@ -3,40 +3,53 @@ import './Home.css'
 
 const Home = () => {
     const [getData, setGetData] = useState([])
-
     const getHome = async () => {
         const response = await fetch('http://localhost:3001/getData')
         const data = await response.json()
+        //console.log(data.data)
         setGetData(data.data)
     }
+    console.log(getData)
     useEffect(() => {
         getHome()
     }, [])
 
     return (
-        <div className="container">
-  
-                {
-                    getData.map((x) => {
-                        return (
-                            <div >
-                              
-                              <p className='a'>a</p>
-                              <p className='a'>a</p>
-                              <br></br>
-                                <h1>Picture of the day</h1>
-                                <img className='image' src={x.url} alt="imag" />
+        <div className="container1">
+            {
+                getData.map((x) => {
+                    return (
+                        <div key={x.date}>
+                            <h1 className='HomeTitle'>Astronomy Picture of the Day</h1>
+                            <div>
+                                {
+                                    x.media_type === "image" ? (
+                                        <img className='img' src={x.url} alt="imag" />
+                                    ) : (
+                                        <iframe
+                                            title='space_video'
+                                            src={x.url}
+                                            //frameBorder="0"
+                                            allow='encrypted-media'
+                                            allowFullScreen
+                                            className='photo'
+
+                                        />
+                                    )
+                                }
+                            </div>
+
+                            <div className='description'>
                                 <div className='title'><h1>{x.title}</h1></div>
                                 <div className='explanation'><h2>explanation</h2>{x.explanation}</div>
                                 <div className='type'>TYPE:{x.media_type}</div>
                                 <div className='date'>Date: {x.date}</div>
-                               
                             </div>
-                        )
-                    })
-                }
-            </div>
-        
+                        </div>
+                    )
+                })
+            }
+        </div>
     )
 }
 
