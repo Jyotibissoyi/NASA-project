@@ -25,6 +25,12 @@ in that page there is select option by using that user can select date and get p
 
 ## BACKEND 
 
+
+
+<img width="960" alt="Screenshot back" src="https://user-images.githubusercontent.com/115546896/216423293-17c41483-01ca-4310-affa-e545f451d881.png">
+
+
+
 Depandencies --> nodemon, mongoose, moment, express, Axios
 
 In this project we get data from NASA API by using Axios call and store that data in our data base. For this we have to create an Get 
@@ -37,6 +43,7 @@ Components --> Navbar, Footer, About,  Contact, Search, Today's picture
 
 
 
+<img width="960" alt="Screenshot front" src="https://user-images.githubusercontent.com/115546896/216423140-a0455552-ac54-419e-a734-ed127c3f16f2.png">
 
 
 
