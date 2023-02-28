@@ -3,37 +3,51 @@ let axios = require("axios")
 let moment = require('moment')
 const DEMO_KEY = "oKknhcqStQVHkx7KBEbfAL55r9PjROChbPNdNT86"
 
-
-
-
 let getDATA = async function (req, res) {
     res.setHeader('Access-Control-Allow-Origin', '*')
     try {
-        const query = req.query.date
-        const  today=moment().format("YYYY-MM-DD")
-        const date= query||today
-        const fetch = await Model.find({ date: date})
-        if (fetch.length != 0) {
-          return  res.status(200).send({ data: fetch })
-        } else {
-            let axiosData = {
-                method: 'get',
-                url: `https://api.nasa.gov/planetary/apod?api_key=${DEMO_KEY}&date=${date}`
-            }
-            let result = await axios(axiosData);
-            // if(result.length==0){
-            //     const dt= 2023-01-28
-            //     const getdata = await Model.find({ date:dt}) 
-            //     res.send({data:getdata})
-            // }
+        //geting date from the query param.
+        const date = req.query.date
 
-            let data = result.data
+        //getting the present date using moment library
+        const now = moment().format("YYYY-MM-DD")
+
+        const dateData = date || now
+
+        //checking in the DATABASE is Data with this date is present or not.
+        const dbData = await Model.find({ date: dateData })
+        if (dbData.length != 0) {
+            return res.status(200).send({ data: dbData })
+        }
+
+        //making a axios call by providing the url with API_KEY and date.
+        try {
+
+            const axiosData = await axios.get(`https://api.nasa.gov/planetary/apod?api_key=${DEMO_KEY}&date=${dateData}`)
+
+            //storing the necessary data from the axios call in a variable called "data"
+            let data = axiosData.data
+
+            //creating the data in our DATABASE that we got from axios call.
             await Model.create(data)
-            return res.status(200).send({ data:[ data] })
+
+            if (axiosData) {
+                // sending the data as respoce that we got from axios call.
+                return res.status(200).send({ data: [data] })
+            }
+
+        } catch (err) {
+            //if any error occurs it will by default get the data from the hardcoded Date for the database.
+            if (err.name == 'AxiosError') {
+                let defaultD = '2018-02-10'
+                const DBData = await Model.find({ date: defaultD })
+
+                return res.status(200).send({ data: DBData })
+            }
         }
     }
     catch (err) {
-       return res.status(500).send({ msg: err.message })
+        return res.status(500).send({ msg: err.message })
     }
 }
 
